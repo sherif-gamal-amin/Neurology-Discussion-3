@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurology Discussion (3)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            user-select: none; /* يمنع تحديد النص */
+            -webkit-user-select: none; /* لمتصفحات WebKit مثل Chrome وSafari */
+            -moz-user-select: none; /* لمتصفح Firefox */
+            -ms-user-select: none; /* لمتصفح Internet Explorer/Edge */
+        }
+        @media print { /* إخفاء الصفحة عند الطباعة */
+            body { 
+                display: none;
+            }
+        }
+
+        .quiz-container {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+        .timer {
+            color: red;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-weight: bold;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            display: none;
+        }
+        .incorrect {
+            color: red;
+        }
+        .correct {
+            color: green;
+        }
+        .question-result {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        img {
+            pointer-events: none; /* يمنع سحب الصور */
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Neurology Discussion (3)</h1>
+        <div class="timer" id="timer">Time remaining: 60 seconds</div>
+
+        <div class="question" id="question-1">
+            <p>1- 55-year-old man is referred to the neurology clinic due to a resting tremor and an abnormal gait characterised by short, shuffling steps. Which one of the following features would point towards a diagnosis of Parkinson's disease rather than parkinsonism of another cause?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="Asymmetrical tremor"> Asymmetrical tremor</label>
+                <label><input type="radio" name="q1" value="Bradykinesia"> Bradykinesia</label>
+                <label><input type="radio" name="q1" value="Impairment of vertical gaze"> Impairment of vertical gaze</label>
+                <label><input type="radio" name="q1" value="Confusion"> Confusion</label>
+                <label><input type="radio" name="q1" value="Poor response to levodopa therapy"> Poor response to levodopa therapy</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-2">
+            <p>2- You review a 65-year-old man who is currently taking antipsychotic medication. His carers have noticed that his movements have been very slow over the past few weeks. Which one of the following would suggest a diagnosis of Parkinson's disease rather than drug-induced parkinsonism?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="Rigidity"> Rigidity</label>
+                <label><input type="radio" name="q2" value="Masked face"> Masked face</label>
+                <label><input type="radio" name="q2" value="Bilateral symptoms"> Bilateral symptoms</label>
+                <label><input type="radio" name="q2" value="Flexed posture"> Flexed posture</label>
+                <label><input type="radio" name="q2" value="Restlessness of arms and legs"> Restlessness of arms and legs</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-3">
+            <p>3- 86 years old man is admitted with parkinsonism. Exposure to which of the following drugs is the most likely cause?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="Trimethoprim"> Trimethoprim</label>
+                <label><input type="radio" name="q3" value="Cyclizine"> Cyclizine</label>
+                <label><input type="radio" name="q3" value="Metoclopramide"> Metoclopramide</label>
+                <label><input type="radio" name="q3" value="Phenytoin"> Phenytoin</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-4">
+            <p>4- A 72-year-old man who is being treated for Parkinson's disease is reviewed. Which one of the following features should prompt you to consider an alternative diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="Micrographia"> Micrographia</label>
+                <label><input type="radio" name="q4" value="Impaired olfaction"> Impaired olfaction</label>
+                <label><input type="radio" name="q4" value="REM sleep behaviour disorder"> REM sleep behaviour disorder</label>
+                <label><input type="radio" name="q4" value="Diplopia"> Diplopia</label>
+                <label><input type="radio" name="q4" value="Psychosis"> Psychosis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-5">
+            <p>5- A 62-year-old man is referred to the neurology clinic with worsening symptoms over the past few months. The neurologist suspects the patient has progressive supranuclear palsy. Which one of the following features is least likely to be seen in this patient?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="Poor response to L-dopa"> Poor response to L-dopa</label>
+                <label><input type="radio" name="q5" value="Impairment of horizontal gaze"> Impairment of horizontal gaze</label>
+                <label><input type="radio" name="q5" value="Falls"> Falls</label>
+                <label><input type="radio" name="q5" value="Cognitive impairment"> Cognitive impairment</label>
+                <label><input type="radio" name="q5" value="Slurring of speech"> Slurring of speech</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-6">
+            <p>6- A 65-year-old man is referred to the neurology outpatient clinic due to a resting tremor of his right hand. A diagnosis of Parkinson's disease is made. He is otherwise well and is not currently disabled by his symptoms. What is the most appropriate treatment?</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="Selegiline"> Selegiline</label>
+                <label><input type="radio" name="q6" value="No treatment"> No treatment</label>
+                <label><input type="radio" name="q6" value="New generation dopamine receptor agonist e.g. ropinirole"> New generation dopamine receptor agonist e.g. ropinirole</label>
+                <label><input type="radio" name="q6" value="Conventional dopamine receptor agonist e.g. bromocriptine"> Conventional dopamine receptor agonist e.g. bromocriptine</label>
+                <label><input type="radio" name="q6" value="Antimuscarinics"> Antimuscarinics</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-7">
+            <p>7- Which one of the following side-effects is least associated with the use of levodopa?</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="Psychosis"> Psychosis</label>
+                <label><input type="radio" name="q7" value="'On-off effect"> 'On-off effect</label>
+                <label><input type="radio" name="q7" value="Postural hypotension"> Postural hypotension</label>
+                <label><input type="radio" name="q7" value="Cardiac arrhythmias"> Cardiac arrhythmias</label>
+                <label><input type="radio" name="q7" value="Galactorrhoea"> Galactorrhoea</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-8">
+            <p>8- A 52-year-old man is prescribed apomorphine. What type of receptors does apomorphine act on?</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="Opioid receptors"> Opioid receptors</label>
+                <label><input type="radio" name="q8" value="GABA receptors"> GABA receptors</label>
+                <label><input type="radio" name="q8" value="Cholinergic receptors"> Cholinergic receptors</label>
+                <label><input type="radio" name="q8" value="Dopamine receptors"> Dopamine receptors</label>
+                <label><input type="radio" name="q8" value="Muscarinic receptors"> Muscarinic receptors</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-9">
+            <p>9- A 64-year-old man with a history of Parkinson's disease is reviewed in clinic and a decision has been made to start him on cabergoline. Which one of the following adverse effects is most strongly associated with this drug?</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="Optic neuritis"> Optic neuritis</label>
+                <label><input type="radio" name="q9" value="Transient rise in liver function tests"> Transient rise in liver function tests</label>
+                <label><input type="radio" name="q9" value="Pulmonary fibrosis"> Pulmonary fibrosis</label>
+                <label><input type="radio" name="q9" value="Renal failure"> Renal failure</label>
+                <label><input type="radio" name="q9" value="Thrombocytopenia"> Thrombocytopenia</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-10">
+            <p>10- You are reviewing a patient with Parkinson's disease. Which one of the following types of medications has been most linked with impulse control disorders?</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="Levodopa"> Levodopa</label>
+                <label><input type="radio" name="q10" value="Catechol-0-Methyltransferase inhibitors"> Catechol-0-Methyltransferase inhibitors</label>
+                <label><input type="radio" name="q10" value="Dopamine receptor agonists"> Dopamine receptor agonists</label>
+                <label><input type="radio" name="q10" value="Amantadine"> Amantadine</label>
+                <label><input type="radio" name="q10" value="Monoamine Oxidase-B inhibitors"> Monoamine Oxidase-B inhibitors</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-11">
+            <p>11- A 63-year-old man is prescribed selegiline for Parkinson's disease. What is the mechanism of action?</p>
+            <div class="options">
+                <label><input type="radio" name="q11" value="Dopamine receptor antagonist"> Dopamine receptor antagonist</label>
+                <label><input type="radio" name="q11" value="Dopamine receptor agonist"> Dopamine receptor agonist</label>
+                <label><input type="radio" name="q11" value="Monoamine Oxidase-B inhibitor"> Monoamine Oxidase-B inhibitor</label>
+                <label><input type="radio" name="q11" value="Antimuscarinic"> Antimuscarinic</label>
+                <label><input type="radio" name="q11" value="Catechol-0-Methyltransferase inhibitor"> Catechol-0-Methyltransferase inhibitor</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-12">
+            <p>12- A 51-year-old man with a history of schizophrenia is reviewed. He has developed parkinsonism secondary to his antipsychotic medication. Which one of the following drugs is most useful in the management of tremor?</p>
+            <div class="options">
+                <label><input type="radio" name="q12" value="Apomorphine"> Apomorphine</label>
+                <label><input type="radio" name="q12" value="Cabergoline"> Cabergoline</label>
+                <label><input type="radio" name="q12" value="Selegiline"> Selegiline</label>
+                <label><input type="radio" name="q12" value="Amantadine"> Amantadine</label>
+                <label><input type="radio" name="q12" value="Benzhexol"> Benzhexol</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-13">
+            <p>13- A 49-year-old man is prescribed procyclidine for Parkinson's disease. What is the mechanism of action?</p>
+            <div class="options">
+                <label><input type="radio" name="q13" value="Antimuscarinic"> Antimuscarinic</label>
+                <label><input type="radio" name="q13" value="Dopamine receptor agonist"> Dopamine receptor agonist</label>
+                <label><input type="radio" name="q13" value="Dopamine receptor antagonist"> Dopamine receptor antagonist</label>
+                <label><input type="radio" name="q13" value="Monoamine Oxidase-B inhibitor"> Monoamine Oxidase-B inhibitor</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-14">
+            <p>14- A 28-year-old woman with a history of systemic lupus erythematosus (SLE) presents with jerky, irregular movements which seem to move from one limb to another. Her symptoms are continuous and there are no other neurological features such as impairment of consciousness. Where is the neurological lesion most likely to be?</p>
+            <div class="options">
+                <label><input type="radio" name="q14" value="Cerebellum"> Cerebellum</label>
+                <label><input type="radio" name="q14" value="Temporal lobe"> Temporal lobe</label>
+                <label><input type="radio" name="q14" value="Hippocampus"> Hippocampus</label>
+                <label><input type="radio" name="q14" value="Thalamus"> Thalamus</label>
+                <label><input type="radio" name="q14" value="Caudate nucleus"> Caudate nucleus</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-15">
+            <p>15- A 44-year-old man presents with involuntary movements of his face, shoulders, and arms. His father had a similar condition. There is also a history of mood changes for the past 6 months. On examination, he appears restless with intermittent slow movements of his hands and face. He has difficulty performing rapid finger movements, and tone is decreased in the upper and lower limbs. Which of the following is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q15" value="Parkinson’s disease"> Parkinson’s disease</label>
+                <label><input type="radio" name="q15" value="Huntington’s chorea"> Huntington’s chorea</label>
+                <label><input type="radio" name="q15" value="amyotrophic lateral sclerosis (ALS)"> amyotrophic lateral sclerosis (ALS)</label>
+                <label><input type="radio" name="q15" value="spinal muscular atrophy"> spinal muscular atrophy</label>
+                <label><input type="radio" name="q15" value="Sydenham’s chorea"> Sydenham’s chorea</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-16">
+            <p>16- A 38-year-old man presents with involuntary facial grimacing, shrugging of the shoulders, and jerking movements of the limb. His father was similarly affected. There is also a history of mood changes for the past 3 months. On examination, he appears restless with intermittent slow movements of his hands and face. He has difficulty performing rapid finger movements, and tone is decreased in the upper and lower limbs. Which of the following is most likely to represent the progression of his illness?</p>
+            <div class="options">
+                <label><input type="radio" name="q16" value="a normal life span"> a normal life span</label>
+                <label><input type="radio" name="q16" value="a 50% chance of only male children being similarly affected"> a 50% chance of only male children being similarly affected</label>
+                <label><input type="radio" name="q16" value="mental deterioration"> mental deterioration</label>
+                <label><input type="radio" name="q16" value="eventual development of rigidity"> eventual development of rigidity</label>
+                <label><input type="radio" name="q16" value="development of hemiparesis"> development of hemiparesis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-17">
+            <p>17- Which one of the following is least associated with the development of chorea?</p>
+            <div class="options">
+                <label><input type="radio" name="q17" value="Haemochromatosis, sarcoidosis"> Haemochromatosis, sarcoidosis</label>
+                <label><input type="radio" name="q17" value="Ataxic telangiectasia, Rheumatic fever"> Ataxic telangiectasia, Rheumatic fever</label>
+                <label><input type="radio" name="q17" value="Wilson's, pregnancy"> Wilson's, pregnancy</label>
+                <label><input type="radio" name="q17" value="SLE, Antiphospholipid syndrome"> SLE, Antiphospholipid syndrome</label>
+                <label><input type="radio" name="q17" value="Huntington's disease, Carbon monoxide poisoning"> Huntington's disease, Carbon monoxide poisoning</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-18">
+            <p>18- Which one of the following is least associated with the development of chorea?</p>
+            <div class="options">
+                <label><input type="radio" name="q18" value="Ataxic telangiectasia"> Ataxic telangiectasia</label>
+                <label><input type="radio" name="q18" value="SLE"> SLE</label>
+                <label><input type="radio" name="q18" value="Wilson's disease"> Wilson's disease</label>
+                <label><input type="radio" name="q18" value="Pregnancy"> Pregnancy</label>
+                <label><input type="radio" name="q18" value="Infective endocarditis"> Infective endocarditis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-19">
+            <p>19- A 70-year-old man is investigated for involuntary jerking movements of his arms. His symptoms seem to resolve when he is asleep. Damage to which one of the following structures may lead to hemiballismus?</p>
+            <div class="options">
+                <label><input type="radio" name="q19" value="Substantia nigra"> Substantia nigra</label>
+                <label><input type="radio" name="q19" value="Red nucleus"> Red nucleus</label>
+                <label><input type="radio" name="q19" value="Subthalamic nucleus"> Subthalamic nucleus</label>
+                <label><input type="radio" name="q19" value="Globus pallidus"> Globus pallidus</label>
+                <label><input type="radio" name="q19" value="Frontal lobe"> Frontal lobe</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-20">
+            <p>20- Which one of the following antibodies are associated with painful sensory neuropathy in patients with small cell lung cancer?</p>
+            <div class="options">
+                <label><input type="radio" name="q20" value="Anti-Ri"> Anti-Ri</label>
+                <label><input type="radio" name="q20" value="Anti-GAD"> Anti-GAD</label>
+                <label><input type="radio" name="q20" value="Anti-Ro"> Anti-Ro</label>
+                <label><input type="radio" name="q20" value="Anti-Hu"> Anti-Hu</label>
+                <label><input type="radio" name="q20" value="Anti-Yo"> Anti-Yo</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-21">
+            <p>21- A 66-year-old woman is investigated for ascites and found to have ovarian cancer. She presents due to 'unsteadiness'. On examination there is evidence of nystagmus and past-pointing. Which one of the following antibodies is most likely to be present?</p>
+            <div class="options">
+                <label><input type="radio" name="q21" value="Anti-Hu"> Anti-Hu</label>
+                <label><input type="radio" name="q21" value="Anti-Yo"> Anti-Yo</label>
+                <label><input type="radio" name="q21" value="Anti-Ri"> Anti-Ri</label>
+                <label><input type="radio" name="q21" value="Anti-Ro"> Anti-Ro</label>
+                <label><input type="radio" name="q21" value="Anti-La"> Anti-La</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-22">
+            <p>22- Which one of the following antibodies is associated with ocular opsoclonus-myoclonus in patients with breast cancer?</p>
+            <div class="options">
+                <label><input type="radio" name="q22" value="Anti-Hu"> Anti-Hu</label>
+                <label><input type="radio" name="q22" value="Anti-La"> Anti-La</label>
+                <label><input type="radio" name="q22" value="Anti-GAD"> Anti-GAD</label>
+                <label><input type="radio" name="q22" value="Anti-Yo"> Anti-Yo</label>
+                <label><input type="radio" name="q22" value="Anti-Ri"> Anti-Ri</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-23">
+            <p>23- 21 year old man is referred to dermatology. He has around 10 hyperpigmented macules on his torso which vary in size from 1.5-5 cm in size. His GP also noted some freckles in the groin region. He is also currently under orthopaedic review due to a worsening scoliosis of the spine. His father suffered from similar problems before having a fatal myocardial infarction two years ago. Which chromosome is most likely to have a gene defect?</p>
+            <div class="options">
+                <label><input type="radio" name="q23" value="Chromosome 4"> Chromosome 4</label>
+                <label><input type="radio" name="q23" value="Chromosome 11"> Chromosome 11</label>
+                <label><input type="radio" name="q23" value="Chromosome 16"> Chromosome 16</label>
+                <label><input type="radio" name="q23" value="Chromosome 17"> Chromosome 17</label>
+                <label><input type="radio" name="q23" value="Chromosome 22"> Chromosome 22</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-24">
+            <p>24- A man is admitted following a generalised seizure. No past history is available as the man is currently in a postictal state. On examination it is noted that he has three patches of hypopigmented skin and fibromata under two of his finger nails. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q24" value="Neurofibromatosis"> Neurofibromatosis</label>
+                <label><input type="radio" name="q24" value="Lennox-Gastaut Syndrome"> Lennox-Gastaut Syndrome</label>
+                <label><input type="radio" name="q24" value="Multiple endocrine neoplasia type 1"> Multiple endocrine neoplasia type 1</label>
+                <label><input type="radio" name="q24" value="Birt-Hogg-Dube syndrome"> Birt-Hogg-Dube syndrome</label>
+                <label><input type="radio" name="q24" value="Tuberous sclerosis"> Tuberous sclerosis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-25">
+            <p>25- Which of the following features is least likely to be found in a patient with tuberous sclerosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q25" value="Adenoma sebaceum"> Adenoma sebaceum</label>
+                <label><input type="radio" name="q25" value="Cafe-au-lait spots"> Cafe-au-lait spots</label>
+                <label><input type="radio" name="q25" value="Retinal hamartomas"> Retinal hamartomas</label>
+                <label><input type="radio" name="q25" value="'Ash-leaf spots"> 'Ash-leaf spots</label>
+                <label><input type="radio" name="q25" value="Axillary freckling & Lisch nodules"> Axillary freckling & Lisch nodules</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-26">
+            <p>26- A 25-year-old female with a history of bilateral vitreous haemorrhage is referred due to progressive ataxia. What is the likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q26" value="Neurofibromatosis type 1"> Neurofibromatosis type 1</label>
+                <label><input type="radio" name="q26" value="Neurofibromatosis type II"> Neurofibromatosis type II</label>
+                <label><input type="radio" name="q26" value="Tuberous sclerosis"> Tuberous sclerosis</label>
+                <label><input type="radio" name="q26" value="Von Hippel-Lindau syndrome"> Von Hippel-Lindau syndrome</label>
+                <label><input type="radio" name="q26" value="Sarcoidosis"> Sarcoidosis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-27">
+            <p>27- 56-year-old woman presents with facial asymmetry. Whilst brushing her teeth this morning she noted that the right hand corner of her mouth was drooping. She is generally well but noted some pain behind her right ear yesterday and says her right eye is becoming dry. On examination she has a complete paralysis of the facial nerve on the right side, extending from the forehead to the mouth. Ear, nose and throat examination is normal. Clinical examination of the peripheral nervous system is normal. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q27" value="Ramsey-Hunt syndrome"> Ramsey-Hunt syndrome</label>
+                <label><input type="radio" name="q27" value="Bell's palsy"> Bell's palsy</label>
+                <label><input type="radio" name="q27" value="Stroke"> Stroke</label>
+                <label><input type="radio" name="q27" value="Multiple sclerosis"> Multiple sclerosis</label>
+                <label><input type="radio" name="q27" value="Parotid tumour"> Parotid tumour</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-28">
+            <p>28- A 42-year-old woman presents as she has noticed a 'droop' in the right side of her face since she woke up this morning. There is no associated limb weakness, dysphagia or visual disturbance. On examination you notice right-sided upper and lower facial paralysis. Which one of the following features would be most consistent with a diagnosis of Bell's palsy?</p>
+            <div class="options">
+                <label><input type="radio" name="q28" value="Vesicular rash around the ear"> Vesicular rash around the ear</label>
+                <label><input type="radio" name="q28" value="Hyperacusis"> Hyperacusis</label>
+                <label><input type="radio" name="q28" value="Sensory loss over the distribution of the facial nerve"> Sensory loss over the distribution of the facial nerve</label>
+                <label><input type="radio" name="q28" value="Pins and needles in the right arm"> Pins and needles in the right arm</label>
+                <label><input type="radio" name="q28" value="Rhinorrhoea"> Rhinorrhoea</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-29">
+            <p>29- 29 years old female presents with dropping of left side of her face and inability to close her left eye. She had viral illness in the last week. No past medical history. On examination, there is left seventh nerve palsy, the remaining cranial nerves are normal. What is the best course of treatment?</p>
+            <div class="options">
+                <label><input type="radio" name="q29" value="Intravenous immunoglobulin"> Intravenous immunoglobulin</label>
+                <label><input type="radio" name="q29" value="No treatment"> No treatment</label>
+                <label><input type="radio" name="q29" value="Oral augmentin"> Oral augmentin</label>
+                <label><input type="radio" name="q29" value="Oral prednisolone"> Oral prednisolone</label>
+                <label><input type="radio" name="q29" value="Oral aciclovir"> Oral aciclovir</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-30">
+            <p>30- Which one of the following is most likely to cause a bilateral facial nerve palsy?</p>
+            <div class="options">
+                <label><input type="radio" name="q30" value="Acoustic neuroma"> Acoustic neuroma</label>
+                <label><input type="radio" name="q30" value="Cholesteatoma"> Cholesteatoma</label>
+                <label><input type="radio" name="q30" value="Bell's palsy"> Bell's palsy</label>
+                <label><input type="radio" name="q30" value="Sarcoidosis"> Sarcoidosis</label>
+                <label><input type="radio" name="q30" value="Amyloidosis"> Amyloidosis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-31">
+            <p>31- Which of the following sentences about UMN facial cranial nerve paralysis is incorrect?</p>
+            <div class="options">
+                <label><input type="radio" name="q31" value="Inability to open eye">Inability to open eye</label>
+                <label><input type="radio" name="q31" value="Unable to blow cheeks">Unable to blow cheeks</label>
+                <label><input type="radio" name="q31" value="Tongue deviation">Tongue deviation</label>
+                <label><input type="radio" name="q31" value="Loss of nasolabial fold">Loss of nasolabial fold</label>
+                <label><input type="radio" name="q31" value="Unable to show teeth properly">Unable to show teeth properly</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-32">
+            <p>32- A 22-year-old woman presents with daily band-like headaches over the past 2 weeks. The headaches seem to be more intense in the back of the head, and are often precipitated by emotional stress. Physical examination fails to disclose focal neurologic or visual deficits. Which of the following is the most appropriate initial step in patient care?</p>
+            <div class="options">
+                <label><input type="radio" name="q32" value="Antidepressant drugs">Antidepressant drugs</label>
+                <label><input type="radio" name="q32" value="Calcium-channel antagonists">Calcium-channel antagonists</label>
+                <label><input type="radio" name="q32" value="Ergotamine-containing preparations">Ergotamine-containing preparations</label>
+                <label><input type="radio" name="q32" value="NSAIDs">NSAIDs</label>
+                <label><input type="radio" name="q32" value="Sumatriptan">Sumatriptan</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-33">
+            <p>33- You are reviewing a 22-year-old man who has developed headaches. Which one of the following features is most typical of migraine?</p>
+            <div class="options">
+                <label><input type="radio" name="q33" value="Pain on neck flexion">Pain on neck flexion</label>
+                <label><input type="radio" name="q33" value="Phonophobia">Phonophobia</label>
+                <label><input type="radio" name="q33" value="Epiphora">Epiphora</label>
+                <label><input type="radio" name="q33" value="Recent viral illness">Recent viral illness</label>
+                <label><input type="radio" name="q33" value="Bilateral, 'tight-band' like pain">Bilateral, 'tight-band' like pain</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-34">
+            <p>34- Which is false regarding migraine?</p>
+            <div class="options">
+                <label><input type="radio" name="q34" value="Hereditary predisposition">Hereditary predisposition</label>
+                <label><input type="radio" name="q34" value="Always above 50 years">Always above 50 years</label>
+                <label><input type="radio" name="q34" value="Common in women">Common in women</label>
+                <label><input type="radio" name="q34" value="Hemicranial headache">Hemicranial headache</label>
+                <label><input type="radio" name="q34" value="Prominent autonomic symptoms">Prominent autonomic symptoms</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-35">
+            <p>35- A 24-year-old female presents with a headache. She has a past history of epilepsy and is known to suffer from migraines but has previously managed attacks with a combination of paracetamol and metoclopramide. This combination is however not working for the current episode. What second line medication is it most appropriate to use?</p>
+            <div class="options">
+                <label><input type="radio" name="q35" value="Codeine + paracetamol">Codeine + paracetamol</label>
+                <label><input type="radio" name="q35" value="Pizotifen">Pizotifen</label>
+                <label><input type="radio" name="q35" value="Zolmitriptan + paracetamol">Zolmitriptan + paracetamol</label>
+                <label><input type="radio" name="q35" value="Methysergide">Methysergide</label>
+                <label><input type="radio" name="q35" value="Ergotamine">Ergotamine</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-36">
+            <p>36- In the treatment of migraine, sumatriptan is an example of ...</p>
+            <div class="options">
+                <label><input type="radio" name="q36" value="Beta-blocker">Beta-blocker</label>
+                <label><input type="radio" name="q36" value="Alpha-blocker and a partial 5-HT2 agonist">Alpha-blocker and a partial 5-HT2 agonist</label>
+                <label><input type="radio" name="q36" value="Specific 5-HT1 agonist">Specific 5-HT1 agonist</label>
+                <label><input type="radio" name="q36" value="5-HT2 antagonist">5-HT2 antagonist</label>
+                <label><input type="radio" name="q36" value="Tricyclic antidepressant">Tricyclic antidepressant</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-37">
+            <p>37- Which one of the following is a contraindication to the use of a triptan in the management of migraine?</p>
+            <div class="options">
+                <label><input type="radio" name="q37" value="Concurrent pizotifen use">Concurrent pizotifen use</label>
+                <label><input type="radio" name="q37" value="Patients older than 55 years">Patients older than 55 years</label>
+                <label><input type="radio" name="q37" value="A history of epilepsy">A history of epilepsy</label>
+                <label><input type="radio" name="q37" value="Previous intracranial tumour">Previous intracranial tumour</label>
+                <label><input type="radio" name="q37" value="A history of ischaemic heart disease">A history of ischaemic heart disease</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-38">
+            <p>38- You want to prescribe an antiemetic to a 19-year-old female who is having a migraine attack. Which one of the following medications is most likely to precipitate extrapyramidal side-effects?</p>
+            <div class="options">
+                <label><input type="radio" name="q38" value="Meptazinol">Meptazinol</label>
+                <label><input type="radio" name="q38" value="Ondansetron">Ondansetron</label>
+                <label><input type="radio" name="q38" value="Domperidone">Domperidone</label>
+                <label><input type="radio" name="q38" value="Cyclizine">Cyclizine</label>
+                <label><input type="radio" name="q38" value="Metoclopramide">Metoclopramide</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-39">
+            <p>39- A 24-year-old female presents to her GP due to increased frequency of migraine attacks. She is now having around four migraines per month. Which type of medication would it be most appropriate to prescribe to reduce the frequency of migraine attacks?</p>
+            <div class="options">
+                <label><input type="radio" name="q39" value="Specific 5-HT2 agonist">Specific 5-HT2 agonist</label>
+                <label><input type="radio" name="q39" value="5-HT1 antagonist">5-HT1 antagonist</label>
+                <label><input type="radio" name="q39" value="Tricyclic antidepressant">Tricyclic antidepressant</label>
+                <label><input type="radio" name="q39" value="Beta-blocker (propranolol)">Beta-blocker (propranolol)</label>
+                <label><input type="radio" name="q39" value="Specific 5-HT1 agonist">Specific 5-HT1 agonist</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-40">
+            <p>40- A 23-year-old man with a history of migraine presents for review. His headaches are now occurring about once a week. He describes unilateral throbbing headaches that may last over 24 hours. Neurological examination is unremarkable. Other than a history of asthma, he is fit and well. What is the most suitable therapy to reduce the frequency of migraine attacks?</p>
+            <div class="options">
+                <label><input type="radio" name="q40" value="Propranolol">Propranolol</label>
+                <label><input type="radio" name="q40" value="Zolmitriptan">Zolmitriptan</label>
+                <label><input type="radio" name="q40" value="Topiramate">Topiramate</label>
+                <label><input type="radio" name="q40" value="Amitriptyline">Amitriptyline</label>
+                <label><input type="radio" name="q40" value="Pizotifen">Pizotifen</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-41">
+            <p>41- Each one of the following drugs may be used to prevent migraine attacks, except:</p>
+            <div class="options">
+                <label><input type="radio" name="q41" value="Pizotifen"> Pizotifen</label>
+                <label><input type="radio" name="q41" value="Amitriptyline"> Amitriptyline</label>
+                <label><input type="radio" name="q41" value="Propranolol"> Propranolol</label>
+                <label><input type="radio" name="q41" value="Methysergide"> Methysergide</label>
+                <label><input type="radio" name="q41" value="Sumatriptan"> Sumatriptan</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-42">
+            <p>42- An 18-year-old woman has periodic episodes that begin with severely decreased vision, followed by ataxia, dysarthria, and tinnitus. The symptoms last for 30 minutes and are then followed by a throbbing occipital headache. Which of the following is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q42" value="vertebral-basilar insufficiency"> vertebral-basilar insufficiency</label>
+                <label><input type="radio" name="q42" value="chronic basilar artery dissection"> chronic basilar artery dissection</label>
+                <label><input type="radio" name="q42" value="classic migraine"> classic migraine</label>
+                <label><input type="radio" name="q42" value="ophthalmoplegic migraine"> ophthalmoplegic migraine</label>
+                <label><input type="radio" name="q42" value="basilar migraine"> basilar migraine</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-43">
+            <p>43- 45 years old man presents with daily headache. He describes two attacks per day over the past 3 weeks. Each attack lasts about an hour and awakens the patient from sleep. There is associated tearing and reddening of the right eye and nasal stuffiness. The pain is deep and excruciating. Neurological examination is nonfocal. The most likely diagnosis is ...</p>
+            <div class="options">
+                <label><input type="radio" name="q43" value="Migraine headache"> Migraine headache</label>
+                <label><input type="radio" name="q43" value="Cluster headache"> Cluster headache</label>
+                <label><input type="radio" name="q43" value="Tension headache"> Tension headache</label>
+                <label><input type="radio" name="q43" value="Brain tumour"> Brain tumour</label>
+                <label><input type="radio" name="q43" value="Giant cell arteritis"> Giant cell arteritis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-44">
+            <p>44- A 41-year-old man presents with a two-week history of headaches around the left side of his face associated with watery eyes. He describes having about two episodes a day, each lasting around 30 minutes. On examination, he has a red left eye and a partial left ptosis. There is no past medical history of note other than migraines as a child. What is the likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q44" value="Atypical migraine"> Atypical migraine</label>
+                <label><input type="radio" name="q44" value="Cluster headache"> Cluster headache</label>
+                <label><input type="radio" name="q44" value="Trigeminal neuralgia"> Trigeminal neuralgia</label>
+                <label><input type="radio" name="q44" value="Acute angle closure glaucoma"> Acute angle closure glaucoma</label>
+                <label><input type="radio" name="q44" value="Cavernous sinus thrombosis"> Cavernous sinus thrombosis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-45">
+            <p>45- A 34-year-old accountant presents with a one-week history of pain around his right eye occurring once or twice a day. They are described as being very severe and lasting between 10-30 minutes each. He also describes a feeling of a blocked nose. What is the treatment of choice to treat this current episode?</p>
+            <div class="options">
+                <label><input type="radio" name="q45" value="Ibuprofen"> Ibuprofen</label>
+                <label><input type="radio" name="q45" value="Acetazolamide + topical pilocarpine"> Acetazolamide + topical pilocarpine</label>
+                <label><input type="radio" name="q45" value="Prednisolone"> Prednisolone</label>
+                <label><input type="radio" name="q45" value="Subcutaneous sumatriptan"> Subcutaneous sumatriptan</label>
+                <label><input type="radio" name="q45" value="Ergotamine"> Ergotamine</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-46">
+            <p>46- A 39-year-old man is diagnosed as having cluster headaches. He has received subcutaneous sumatriptan on two occasions but would like to start medication to help prevent further attacks. Of the following options, which one is the most suitable treatment?</p>
+            <div class="options">
+                <label><input type="radio" name="q46" value="Atenolol"> Atenolol</label>
+                <label><input type="radio" name="q46" value="Amitriptyline"> Amitriptyline</label>
+                <label><input type="radio" name="q46" value="Sodium valproate"> Sodium valproate</label>
+                <label><input type="radio" name="q46" value="Verapamil"> Verapamil</label>
+                <label><input type="radio" name="q46" value="Gabapentin"> Gabapentin</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-47">
+            <p>47- 30 years old man complains of unilateral headache. He was diagnosed with migraine at age of 24. Headache did not respond to triptan therapy at that time, but after 6 weeks headache resolved. He has had 3 or 4 spells of severe headache since then. Currently, headache has been present for the past 2 weeks. Headache starts with stabbing pain just below the right eye. The affected eye feels irritated (red eye with lacrimation). Each pain lasts from 60 to 90 minutes. Other neurological examination is now normal. What is the best approach to treat this patient?</p>
+            <div class="options">
+                <label><input type="radio" name="q47" value="Prescribe oral sumatriptan for use at onset of headache"> Prescribe oral sumatriptan for use at onset of headache</label>
+                <label><input type="radio" name="q47" value="Prednisolone 60 mg daily for 2-4 weeks"> Prednisolone 60 mg daily for 2-4 weeks</label>
+                <label><input type="radio" name="q47" value="Obtain MRI scan of head with gadolinium contrast"> Obtain MRI scan of head with gadolinium contrast</label>
+                <label><input type="radio" name="q47" value="Begin propranolol 20 mg bid"> Begin propranolol 20 mg bid</label>
+                <label><input type="radio" name="q47" value="Refer for neuropsychiatric"> Refer for neuropsychiatric</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-48">
+            <p>48- A 31-year-old woman presents with a 4-month history of headache. She has brought a headache diary which demonstrates that her symptoms are present on around 20-25 days of each month. The headache is typically unilateral and she is currently taking paracetamol 1g qds and ibuprofen 400mg tds every day to try and relieve her symptoms. A diagnosis of medication overuse headache is suspected. What is the most appropriate management?</p>
+            <div class="options">
+                <label><input type="radio" name="q48" value="Add metoclopramide + start propranolol"> Add metoclopramide + start propranolol</label>
+                <label><input type="radio" name="q48" value="Gradually withdraw analgesics + start propranolol"> Gradually withdraw analgesics + start propranolol</label>
+                <label><input type="radio" name="q48" value="Abruptly stop analgesics"> Abruptly stop analgesics</label>
+                <label><input type="radio" name="q48" value="Gradually withdraw analgesics"> Gradually withdraw analgesics</label>
+                <label><input type="radio" name="q48" value="Continue analgesics + start propranolol"> Continue analgesics + start propranolol</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-49">
+            <p>49- Which one of the following statements regarding the development of a headache following lumbar puncture is incorrect?</p>
+            <div class="options">
+                <label><input type="radio" name="q49" value="Occurs in one-third of patients"> Occurs in one-third of patients</label>
+                <label><input type="radio" name="q49" value="May last several days"> May last several days</label>
+                <label><input type="radio" name="q49" value="More common in females"> More common in females</label>
+                <label><input type="radio" name="q49" value="Usually develops within the first 12 hours"> Usually develops within the first 12 hours</label>
+                <label><input type="radio" name="q49" value="Worsens with upright position"> Worsens with upright position</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-50">
+            <p>50- A 25-year-old female presents 5 days after discharge from hospital following an admission for suspected meningitis. A lumbar puncture was performed which showed no evidence of infection. Unfortunately, she developed a headache 48 hours after discharge. This has now lasted 3 days and has failed to settle with analgesia. Which one of the following treatment options should be considered?</p>
+            <div class="options">
+                <label><input type="radio" name="q50" value="Intrathecal steroids"> Intrathecal steroids</label>
+                <label><input type="radio" name="q50" value="Repeat lumbar puncture"> Repeat lumbar puncture</label>
+                <label><input type="radio" name="q50" value="Course of oral prednisolone"> Course of oral prednisolone</label>
+                <label><input type="radio" name="q50" value="Blood patch"> Blood patch</label>
+                <label><input type="radio" name="q50" value="Intravenous fluids on top of oral fluid intake"> Intravenous fluids on top of oral fluid intake</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-51">
+            <p>51- A 23-year-old female has a lumbar puncture to exclude a subarachnoid hemorrhage following a negative CT scan. Which one of the following factors would be most likely to influence the incidence of post-lumbar puncture headache?</p>
+            <div class="options">
+                <label><input type="radio" name="q51" value="Position of the patient"> Position of the patient</label>
+                <label><input type="radio" name="q51" value="Increased fluid intake post procedure"> Increased fluid intake post procedure</label>
+                <label><input type="radio" name="q51" value="Opening pressure of CSF"> Opening pressure of CSF</label>
+                <label><input type="radio" name="q51" value="Bed rest following the procedure"> Bed rest following the procedure</label>
+                <label><input type="radio" name="q51" value="Replacing the stylet"> Replacing the stylet</label>
+            </div>
+        </div>
+
+        <button class="btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+        <button class="btn" id="submitBtn" onclick="evaluateQuiz()" style="display: none;">Submit Quiz</button>
+
+        <div class="result" id="result">
+            <h2>Results</h2>
+            <div id="score"></div>
+            <div id="answers-summary"></div>
+        </div>
+    </div>
+
+    <script>
+        // إضافة حدث للكيبورد لمنع حفظ الصفحة
+        document.addEventListener("keydown", function (event) {
+            if (event.ctrlKey && event.key === "s") {
+                event.preventDefault();
+                alert("تم منع حفظ الصفحة!");
+            }
+        });
+
+        // إضافة حدث للكيبورد لمنع فتح أدوات المطور
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+                event.preventDefault();
+                alert("تم تعطيل أدوات المطور!");
+            }
+        });
+
+        // إضافة حدث للكيبورد لمنع النقر بزر اليمين
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault(); // يمنع فتح قائمة السياق
+            alert("النقر بزر الماوس الأيمن غير مسموح به.");
+        });
+
+        let currentQuestion = 1;
+        const totalQuestions = 25;
+        let score = 0;
+        let timerInterval;
+        const answers = {
+            q1: ""
+        };
+
+        function showQuestion() {
+            document.querySelectorAll('.question').forEach((q, index) => {
+                q .style.display = index + 1 === currentQuestion ? 'block' : 'none';
+            });
+            document.getElementById('nextBtn').style.display = currentQuestion < totalQuestions ? 'block' : 'none';
+            document.getElementById('submitBtn').style.display = currentQuestion === totalQuestions ? 'block' : 'none';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            clearInterval(timerInterval);
+            startTimer();
+            showQuestion();
+        }
+
+        function startTimer() {
+            let timeRemaining = 60;
+            document.getElementById('timer').textContent = `Time remaining: ${timeRemaining} seconds`;
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('timer').textContent = `Time remaining: ${timeRemaining} seconds`;
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    if (currentQuestion < totalQuestions) {
+                        nextQuestion();
+                    } else {
+                        evaluateQuiz();
+                    }
+                }
+            }, 1000);
+        }
+
+        function evaluateQuiz() {
+            score = 0;
+            let summary = '';
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                const correctAnswer = answers[`q${i}`];
+                const questionElement = document.getElementById(`question-${i}`);
+                const options = document.querySelectorAll(`input[name="q${i}"]`);
+                let questionSummary = `<p><strong>Question ${i}: </strong>${questionElement.querySelector('p').innerText}</p>`;
+
+                options.forEach(option => {
+                    const optionLabel = option.parentElement;
+                    if (option.value === correctAnswer) {
+                        optionLabel.style.color = 'green';
+                    } else if (selectedOption && selectedOption.value === option.value) {
+                        optionLabel.style.color = 'red';
+                    }
+                });
+
+                questionSummary += `<div>Answer: <strong>${selectedOption ? selectedOption.value : 'None selected'}</strong></div>`;
+                questionSummary += `<div>Correct answer: <strong>${correctAnswer}</strong></div>`;
+
+                if (selectedOption && selectedOption.value === correctAnswer) {
+                    score++;
+                    summary += questionSummary + `<p class="correct">Correct</p>`;
+                } else {
+                    summary += questionSummary + `<p class="incorrect">Incorrect</p>`;
+                }
+            }
+
+            document.getElementById('score').textContent = `Your score: ${score} out of ${totalQuestions}`;
+            document.getElementById('answers-summary').innerHTML = summary;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('timer').style.display = 'none'; 
+            document.querySelectorAll('.question').forEach((q) => q.style.display = 'none');
+
+            clearInterval(timerInterval);
+        }
+
+        window.onload = function() {
+            showQuestion();
+            startTimer();
+        };
+        
+        
+        function nextQuestion() {
+    // Increase the current question counter
+            currentQuestion++;
+
+            // Reset the timer
+            clearInterval(timerInterval); // Stop the current timer
+            startTimer(); // Start the timer from the beginning
+
+            // Show the next question
+            showQuestion();
+        }
+        
+    </script>
+</body>
+</html>
